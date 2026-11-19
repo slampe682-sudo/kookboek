@@ -7,11 +7,11 @@ porties: 4
 beschrijving: De echte Romeinse carbonara — zonder room, wel romig door ei en pecorino.
 ingredienten:
   - { hoeveelheid: 400, eenheid: g, naam: spaghetti of rigatoni }
-  - { hoeveelheid: 150, eenheid: g, naam: guanciale (of pancetta), in reepjes }
+  - { hoeveelheid: 150, eenheid: g, naam: "guanciale (of pancetta), in reepjes" }
   - { hoeveelheid: 4, eenheid: "", naam: eidooiers }
   - { hoeveelheid: 1, eenheid: "", naam: heel ei }
-  - { hoeveelheid: 60, eenheid: g, naam: Pecorino Romano, fijn geraspt }
-  - { hoeveelheid: 20, eenheid: g, naam: Parmezaanse kaas, fijn geraspt }
+  - { hoeveelheid: 60, eenheid: g, naam: "Pecorino Romano, fijn geraspt" }
+  - { hoeveelheid: 20, eenheid: g, naam: "Parmezaanse kaas, fijn geraspt" }
   - { naam: versgemalen zwarte peper }
   - { naam: zout (voor het pastawater) }
 tip: Houd een kopje pastawater achter de hand. Wordt de saus te dik, roer er een scheutje door; is hij te dun, zet de pan dan heel even terug op laag vuur en blijf roeren.

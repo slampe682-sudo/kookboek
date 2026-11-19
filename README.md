@@ -25,6 +25,7 @@ ingredienten:
   - { hoeveelheid: 300, eenheid: g, naam: bloem }
   - { hoeveelheid: 2, eenheid: "", naam: eieren }
   - { naam: snufje zout }       # zonder hoeveelheid: wordt niet omgerekend
+  - { hoeveelheid: 1, eenheid: "", naam: "ui, gesnipperd" }   # komma in de naam? Zet de naam tussen "aanhalingstekens"
 ---
 
 1. Eerste stap.
