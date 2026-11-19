@@ -1,0 +1,68 @@
+---
+layout: default
+---
+<article class="recept">
+  <a class="terug" href="{{ '/' | relative_url }}">← Alle recepten</a>
+
+  <header class="recept-kop">
+    <div class="recept-emoji" aria-hidden="true">{{ page.emoji | default: "🍽️" }}</div>
+    <div>
+      <span class="tag">{{ page.categorie }}</span>
+      <h1>{{ page.title }}</h1>
+      <p class="lead">{{ page.beschrijving }}</p>
+      <div class="meta"><span>⏱ {{ page.tijd }} minuten</span></div>
+    </div>
+  </header>
+
+  <div class="recept-grid">
+    <section class="ingredienten">
+      <div class="porties">
+        <h2>Ingrediënten</h2>
+        <div class="stepper" aria-label="Aantal personen">
+          <button type="button" id="min" aria-label="Minder personen">−</button>
+          <span><b id="aantal">{{ page.porties }}</b> pers.</span>
+          <button type="button" id="plus" aria-label="Meer personen">+</button>
+        </div>
+      </div>
+      <ul>
+        {% for i in page.ingredienten %}
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>{% if i.hoeveelheid %}<b class="hv" data-hv="{{ i.hoeveelheid }}">{{ i.hoeveelheid }}</b> {{ i.eenheid }} {% endif %}{{ i.naam }}</span>
+          </label>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="bereiding">
+      <h2>Bereiding</h2>
+      {{ content }}
+      {% if page.tip %}<aside class="tip"><b>Tip:</b> {{ page.tip }}</aside>{% endif %}
+      <div class="acties">
+        <button type="button" class="btn" onclick="window.print()">Afdrukken</button>
+        <a class="btn" href="https://github.com/{{ site.github_repo }}/edit/main/{{ page.path }}" target="_blank" rel="noopener">Recept bewerken</a>
+      </div>
+    </section>
+  </div>
+</article>
+
+<script>
+  const basis = {{ page.porties | default: 1 }};
+  let n = basis;
+  const fmt = x => {
+    if (x >= 10) return String(Math.round(x));
+    const r = Math.round(x * 2) / 2;
+    const heel = Math.floor(r);
+    return r % 1 ? (heel ? heel + '½' : '½') : String(heel);
+  };
+  function update() {
+    document.getElementById('aantal').textContent = n;
+    document.querySelectorAll('.hv').forEach(el => {
+      el.textContent = fmt(parseFloat(el.dataset.hv) * n / basis);
+    });
+  }
+  document.getElementById('min').onclick = () => { if (n > 1) { n--; update(); } };
+  document.getElementById('plus').onclick = () => { if (n < 40) { n++; update(); } };
+</script>

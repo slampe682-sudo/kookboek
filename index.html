@@ -1,0 +1,71 @@
+---
+layout: default
+---
+{% capture sjabloon %}---
+title: Naam van het recept
+emoji: 🍽️
+categorie: Hoofdgerecht
+tijd: 30
+porties: 4
+beschrijving: Eén zin over dit gerecht.
+ingredienten:
+  - { hoeveelheid: 300, eenheid: g, naam: ingrediënt }
+  - { hoeveelheid: 2, eenheid: stuks, naam: nog een ingrediënt }
+  - { naam: zout en peper }
+---
+
+1. Eerste stap.
+2. Tweede stap.
+3. Smakelijk eten!
+{% endcapture %}
+{% assign recepten = site.recepten | sort: "title" %}
+{% assign categorieen = site.recepten | map: "categorie" | uniq | sort %}
+
+<section class="intro">
+  <h1>{{ site.title }}</h1>
+  <p>{{ recepten.size }} {% if recepten.size == 1 %}recept{% else %}recepten{% endif %} om te koken, te delen en nooit meer kwijt te raken.</p>
+  <div class="toolbar">
+    <input id="zoek" type="search" placeholder="Zoek op recept of ingrediënt…" aria-label="Zoek recepten">
+    <a class="btn primary" href="https://github.com/{{ site.github_repo }}/new/main/_recepten?filename=nieuw-recept.md&value={{ sjabloon | url_encode }}" target="_blank" rel="noopener">+ Recept toevoegen</a>
+  </div>
+  <div class="chips" role="group" aria-label="Filter op categorie">
+    <button class="chip active" data-cat="">Alles</button>
+    {% for c in categorieen %}<button class="chip" data-cat="{{ c }}">{{ c }}</button>{% endfor %}
+  </div>
+</section>
+
+<section class="cards" id="lijst">
+  {% for r in recepten %}
+  <a class="card" href="{{ r.url | relative_url }}" data-cat="{{ r.categorie }}" data-zoek="{{ r.title | downcase }} {% for i in r.ingredienten %}{{ i.naam | downcase }} {% endfor %}">
+    <div class="card-emoji" aria-hidden="true">{{ r.emoji | default: "🍽️" }}</div>
+    <div class="card-body">
+      <span class="tag">{{ r.categorie }}</span>
+      <h2>{{ r.title }}</h2>
+      <p>{{ r.beschrijving }}</p>
+      <div class="meta"><span>⏱ {{ r.tijd }} min</span><span>👥 {{ r.porties }} pers.</span></div>
+    </div>
+  </a>
+  {% endfor %}
+</section>
+<p id="leeg" class="leeg" hidden>Geen recepten gevonden.</p>
+
+<script>
+  const zoek = document.getElementById('zoek');
+  const chips = document.querySelectorAll('.chip');
+  const kaarten = document.querySelectorAll('#lijst .card');
+  let cat = '';
+  function filter() {
+    const q = zoek.value.trim().toLowerCase();
+    let zichtbaar = 0;
+    kaarten.forEach(k => {
+      const ok = (!cat || k.dataset.cat === cat) && (!q || k.dataset.zoek.includes(q));
+      k.hidden = !ok; if (ok) zichtbaar++;
+    });
+    document.getElementById('leeg').hidden = zichtbaar > 0;
+  }
+  zoek.addEventListener('input', filter);
+  chips.forEach(c => c.addEventListener('click', () => {
+    chips.forEach(x => x.classList.remove('active'));
+    c.classList.add('active'); cat = c.dataset.cat; filter();
+  }));
+</script>

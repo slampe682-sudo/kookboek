@@ -1,0 +1,21 @@
+title: Mijn Kookboek
+description: Mijn verzameling favoriete recepten.
+baseurl: /kookboek
+github_repo: slampe682-sudo/kookboek
+lang: nl
+
+markdown: kramdown
+
+collections:
+  recepten:
+    output: true
+    permalink: /recepten/:name/
+
+defaults:
+  - scope:
+      type: recepten
+    values:
+      layout: recept
+
+exclude:
+  - README.md
