@@ -9,6 +9,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+  <script>
+    // Beheerknoppen alleen tonen na één keer openen via ?beheer (uitzetten met ?uit)
+    (function () {
+      var q = location.search, aan = false;
+      try {
+        if (/[?&]beheer\b/.test(q)) localStorage.setItem('kookboek-beheer', '1');
+        if (/[?&]uit\b/.test(q)) localStorage.removeItem('kookboek-beheer');
+        aan = localStorage.getItem('kookboek-beheer') === '1';
+      } catch (e) { aan = /[?&]beheer\b/.test(q); }
+      if (aan) document.documentElement.classList.add('is-beheer');
+    })();
+  </script>
 </head>
 <body>
   <header class="topbar">

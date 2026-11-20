@@ -26,7 +26,7 @@ ingredienten:
   <p>{{ recepten.size }} {% if recepten.size == 1 %}recept{% else %}recepten{% endif %} om te koken, te delen en nooit meer kwijt te raken.</p>
   <div class="toolbar">
     <input id="zoek" type="search" placeholder="Zoek op recept of ingrediënt…" aria-label="Zoek recepten">
-    <a class="btn primary" href="https://github.com/{{ site.github_repo }}/new/main/_recepten?filename=nieuw-recept.md&value={{ sjabloon | url_encode }}" target="_blank" rel="noopener">+ Recept toevoegen</a>
+    <a class="btn primary beheer" href="https://github.com/{{ site.github_repo }}/new/main/_recepten?filename=nieuw-recept.md&value={{ sjabloon | url_encode }}" target="_blank" rel="noopener">+ Recept toevoegen</a>
   </div>
   <div class="chips" role="group" aria-label="Filter op categorie">
     <button class="chip active" data-cat="">Alles</button>

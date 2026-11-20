@@ -32,6 +32,8 @@ a { color: var(--accent); }
 h1, h2 { font-family: Fraunces, Georgia, serif; letter-spacing: -.01em; line-height: 1.15; }
 .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
 [hidden] { display: none !important; }
+.beheer { display: none !important; }
+.is-beheer .beheer { display: inline-flex !important; }
 
 .topbar { border-bottom: 1px solid var(--line); background: var(--surface); }
 .topbar-inner { padding: 14px 16px; }
