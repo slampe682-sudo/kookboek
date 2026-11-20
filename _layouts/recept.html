@@ -34,6 +34,8 @@ layout: default
         </li>
         {% endfor %}
       </ul>
+      <button type="button" class="btn primary lijst-knop" id="naarLijst">🛒 Op boodschappenlijst</button>
+      <p class="klein" id="lijstMelding" role="status"></p>
     </section>
 
     <section class="bereiding">
@@ -63,6 +65,21 @@ layout: default
       el.textContent = fmt(parseFloat(el.dataset.hv) * n / basis);
     });
   }
+  const ingredienten = {{ page.ingredienten | jsonify }};
+  document.getElementById('naarLijst').onclick = () => {
+    Lijst.voegToe({
+      titel: {{ page.title | jsonify }},
+      url: {{ page.url | relative_url | jsonify }},
+      porties: n,
+      items: ingredienten.map(i => ({
+        naam: i.naam,
+        eenheid: i.eenheid || '',
+        hv: typeof i.hoeveelheid === 'number' ? i.hoeveelheid * n / basis : null
+      }))
+    });
+    document.getElementById('lijstMelding').innerHTML =
+      '✓ Toegevoegd voor ' + n + ' pers. <a href="{{ '/boodschappen/' | relative_url }}">Bekijk je lijst →</a>';
+  };
   document.getElementById('min').onclick = () => { if (n > 1) { n--; update(); } };
   document.getElementById('plus').onclick = () => { if (n < 40) { n++; update(); } };
 </script>

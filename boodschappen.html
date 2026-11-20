@@ -1,0 +1,83 @@
+---
+layout: default
+title: Boodschappenlijst
+permalink: /boodschappen/
+---
+<section class="lijst-pagina">
+  <a class="terug" href="{{ '/' | relative_url }}">← Alle recepten</a>
+  <h1>🛒 Boodschappenlijst</h1>
+
+  <div id="leegLijst" class="leeg-blok" hidden>
+    <p>Je lijst is nog leeg.</p>
+    <p>Open een recept en klik op <b>Op boodschappenlijst</b>. Ingrediënten uit meerdere recepten worden automatisch bij elkaar opgeteld.</p>
+    <a class="btn primary" href="{{ '/' | relative_url }}">Naar de recepten</a>
+  </div>
+
+  <div id="gevuld" hidden>
+    <div class="lijst-recepten" id="receptChips"></div>
+
+    <ul class="boodschappen" id="items"></ul>
+
+    <div class="acties">
+      <button type="button" class="btn primary" id="delen">Delen / kopiëren</button>
+      <button type="button" class="btn" id="afWeg">Afgevinkte verbergen</button>
+      <button type="button" class="btn" id="wissen">Lijst leegmaken</button>
+    </div>
+    <p class="klein" id="melding" role="status"></p>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var verberg = false;
+    function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+    function tekstRegel(i) {
+      return (i.hv != null ? Lijst.fmt(i.hv) + ' ' + (i.eenheid ? i.eenheid + ' ' : '') : '') + i.naam;
+    }
+
+    function render() {
+      var d = Lijst.lees(), items = Lijst.samengevoegd();
+      document.getElementById('leegLijst').hidden = d.recepten.length > 0;
+      document.getElementById('gevuld').hidden = d.recepten.length === 0;
+      if (!d.recepten.length) return;
+
+      document.getElementById('receptChips').innerHTML = d.recepten.map(function (r) {
+        return '<span class="recept-chip"><a href="' + esc(r.url) + '">' + esc(r.titel) + '</a> · ' + r.porties + ' pers. ' +
+          '<button type="button" data-weg="' + esc(r.url) + '" aria-label="' + esc(r.titel) + ' van de lijst halen">×</button></span>';
+      }).join('');
+
+      var zichtbaar = items.filter(function (i) { return !(verberg && i.af); });
+      zichtbaar.sort(function (a, b) { return a.af - b.af; });
+      document.getElementById('items').innerHTML = zichtbaar.map(function (i) {
+        return '<li><label><input type="checkbox" data-k="' + esc(i.sleutel) + '"' + (i.af ? ' checked' : '') + '>' +
+          '<span>' + (i.hv != null ? '<b>' + Lijst.fmt(i.hv) + '</b> ' + esc(i.eenheid) + ' ' : '') + esc(i.naam) +
+          (i.recepten.length > 1 ? ' <small>(' + i.recepten.length + ' recepten)</small>' : '') + '</span></label></li>';
+      }).join('');
+      document.getElementById('afWeg').textContent = verberg ? 'Afgevinkte tonen' : 'Afgevinkte verbergen';
+    }
+
+    document.getElementById('items').addEventListener('change', function (e) {
+      if (e.target.dataset.k) { Lijst.vink(e.target.dataset.k, e.target.checked); render(); }
+    });
+    document.getElementById('receptChips').addEventListener('click', function (e) {
+      if (e.target.dataset.weg) { Lijst.verwijder(e.target.dataset.weg); render(); }
+    });
+    document.getElementById('afWeg').onclick = function () { verberg = !verberg; render(); };
+    document.getElementById('wissen').onclick = function () {
+      if (confirm('Weet je zeker dat je de hele lijst wilt leegmaken?')) { Lijst.leeg(); render(); }
+    };
+    document.getElementById('delen').onclick = async function () {
+      var tekst = 'Boodschappenlijst\n\n' + Lijst.samengevoegd().filter(function (i) { return !i.af; })
+        .map(function (i) { return '☐ ' + tekstRegel(i); }).join('\n');
+      var melding = document.getElementById('melding');
+      try {
+        if (navigator.share) { await navigator.share({ title: 'Boodschappenlijst', text: tekst }); return; }
+      } catch (e) { if (e && e.name === 'AbortError') return; }
+      try { await navigator.clipboard.writeText(tekst); melding.textContent = 'Gekopieerd! Plak de lijst in WhatsApp, Notities of een e-mail.'; }
+      catch (e) { melding.textContent = 'Kopiëren lukte niet in deze browser.'; }
+    };
+
+    render();
+  })();
+</script>

@@ -117,6 +117,44 @@ h1, h2 { font-family: Fraunces, Georgia, serif; letter-spacing: -.01em; line-hei
 .tip { margin: 8px 0 24px; padding: 14px 18px; border-radius: 12px; background: var(--accent-soft); }
 .acties { display: flex; flex-wrap: wrap; gap: 10px; }
 
+/* Boodschappenlijst */
+.topbar-inner { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.lijst-link { display: inline-flex; align-items: center; gap: 6px; color: var(--text); text-decoration: none; font-weight: 500; }
+.lijst-link:hover { color: var(--accent); }
+.teller {
+  min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: var(--accent); color: #fff;
+  font-size: .78rem; font-weight: 700; display: inline-grid; place-items: center;
+}
+.lijst-knop { width: 100%; justify-content: center; margin-top: 16px; }
+.klein { font-size: .9rem; color: var(--muted); margin: 10px 0 0; min-height: 1.2em; }
+
+.lijst-pagina { padding: 24px 0 48px; max-width: 680px; }
+.lijst-pagina h1 { font-size: clamp(2rem, 6vw, 2.8rem); margin: 0 0 20px; }
+.leeg-blok { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+.leeg-blok p { margin: 0 0 12px; color: var(--muted); }
+.lijst-recepten { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.recept-chip {
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 6px 4px 14px; border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent); font-size: .9rem; font-weight: 500;
+}
+.recept-chip a { color: inherit; text-decoration: none; font-weight: 600; }
+.recept-chip button {
+  width: 24px; height: 24px; border-radius: 50%; border: 0; background: transparent; color: inherit;
+  font-size: 1.1rem; line-height: 1; cursor: pointer;
+}
+.recept-chip button:hover { background: rgba(0,0,0,.08); }
+.boodschappen { list-style: none; margin: 0 0 20px; padding: 6px 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.boodschappen li { border-bottom: 1px solid var(--line); }
+.boodschappen li:last-child { border-bottom: 0; }
+.boodschappen label { display: flex; gap: 12px; padding: 12px 0; cursor: pointer; }
+.boodschappen input { accent-color: var(--accent); width: 20px; height: 20px; margin-top: 2px; flex: none; }
+.boodschappen input:checked + span { text-decoration: line-through; color: var(--muted); }
+.boodschappen small { color: var(--muted); }
+
+@media print {
+  .lijst-link, .lijst-knop, #lijstMelding, .recept-chip button { display: none !important; }
+}
+
 .footer { border-top: 1px solid var(--line); padding-top: 18px; padding-bottom: 40px; color: var(--muted); font-size: .9rem; }
 
 @media (max-width: 760px) {

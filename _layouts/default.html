@@ -21,11 +21,13 @@
       if (aan) document.documentElement.classList.add('is-beheer');
     })();
   </script>
+  <script src="{{ '/assets/lijst.js' | relative_url }}"></script>
 </head>
 <body>
   <header class="topbar">
     <div class="wrap topbar-inner">
       <a class="brand" href="{{ '/' | relative_url }}"><span aria-hidden="true">🍳</span> {{ site.title }}</a>
+      <a class="lijst-link" href="{{ '/boodschappen/' | relative_url }}"><span aria-hidden="true">🛒</span> Boodschappen <span class="teller" id="lijstTeller" hidden></span></a>
     </div>
   </header>
   <main class="wrap">
