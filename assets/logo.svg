@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#c2502a"/>
+  <!-- steel -->
+  <rect x="38" y="16" width="20" height="7" rx="3.5" fill="#2a211b" transform="rotate(-35 38 19.5)"/>
+  <!-- pan -->
+  <circle cx="27" cy="36" r="19" fill="#2a211b"/>
+  <circle cx="27" cy="36" r="15.5" fill="#3b2f27"/>
+  <!-- ei -->
+  <path d="M17 34c0-6 6-9.5 11-8.5 5.5 1 9 4 9.5 8.5.6 5.2-3.4 10-9.5 10.5-6.5.5-11-4-11-10.5z" fill="#fffaf2"/>
+  <circle cx="27.5" cy="35" r="4.6" fill="#f6b21b"/>
+  <circle cx="26" cy="33.6" r="1.4" fill="#ffd968"/>
+</svg>

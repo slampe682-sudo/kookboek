@@ -9,6 +9,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   {%- assign versie = site.time | date: '%s' %}
+  <link rel="icon" href="{{ '/assets/logo.svg' | relative_url }}?v={{ versie }}" type="image/svg+xml">
+  <link rel="icon" href="{{ '/assets/favicon-32.png' | relative_url }}?v={{ versie }}" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | relative_url }}?v={{ versie }}">
+  <meta name="theme-color" content="#c2502a">
   <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}?v={{ versie }}">
   <script>
     // Beheerknoppen alleen tonen na één keer openen via ?beheer (uitzetten met ?uit)
@@ -27,7 +31,7 @@
 <body>
   <header class="topbar">
     <div class="wrap topbar-inner">
-      <a class="brand" href="{{ '/' | relative_url }}"><span aria-hidden="true">🍳</span> {{ site.title }}</a>
+      <a class="brand" href="{{ '/' | relative_url }}"><img src="{{ '/assets/logo.svg' | relative_url }}" alt="" width="30" height="30"> {{ site.title }}</a>
       <a class="lijst-link" href="{{ '/boodschappen/' | relative_url }}"><span aria-hidden="true">🛒</span> Boodschappen <span class="teller" id="lijstTeller" hidden></span></a>
     </div>
   </header>
