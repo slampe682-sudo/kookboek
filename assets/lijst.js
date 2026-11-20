@@ -29,7 +29,12 @@ window.Lijst = (function () {
   }
   function leeg() { schrijf({ recepten: [], afgevinkt: {} }); }
 
-  function sleutel(i) { return (i.naam + '|' + (i.eenheid || '')).toLowerCase(); }
+  // Voor de winkel telt alleen het product: "ui, gesnipperd" en "volle melk (voor de ragù)" → "ui", "volle melk".
+  function basisNaam(naam) {
+    var b = String(naam).replace(/\s*\([^)]*\)/g, '').split(',')[0].trim();
+    return b || String(naam).trim();
+  }
+  function sleutel(i) { return (basisNaam(i.naam) + '|' + (i.eenheid || '')).toLowerCase(); }
 
   // Zelfde ingrediënt (naam + eenheid) uit verschillende recepten optellen.
   function samengevoegd() {
@@ -37,7 +42,7 @@ window.Lijst = (function () {
     d.recepten.forEach(function (r) {
       r.items.forEach(function (i) {
         var k = sleutel(i);
-        if (!map[k]) { map[k] = { sleutel: k, naam: i.naam, eenheid: i.eenheid || '', hv: null, recepten: [] }; volgorde.push(k); }
+        if (!map[k]) { map[k] = { sleutel: k, naam: basisNaam(i.naam), eenheid: i.eenheid || '', hv: null, recepten: [] }; volgorde.push(k); }
         if (typeof i.hv === 'number') map[k].hv = (map[k].hv || 0) + i.hv;
         if (map[k].recepten.indexOf(r.titel) < 0) map[k].recepten.push(r.titel);
       });
