@@ -1,1 +1,1 @@
-{%- assign m = include.min | plus: 0 -%}{%- if m >= 60 -%}{%- assign u = m | divided_by: 60 -%}{%- assign r = m | modulo: 60 -%}{{ u }} u{% if r > 0 %} {{ r }} min{% endif %}{%- else -%}{{ m }} min{%- endif -%}
+{%- assign tijd_min = include.min | plus: 0 -%}{%- assign tijd_uur = tijd_min | divided_by: 60 -%}{%- assign tijd_rest = tijd_min | modulo: 60 -%}{%- if tijd_uur > 0 -%}{{ tijd_uur }} u{%- if tijd_rest > 0 %} {{ tijd_rest }} min{%- endif -%}{%- else -%}{{ tijd_min }} min{%- endif -%}
