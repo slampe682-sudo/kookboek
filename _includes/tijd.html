@@ -1,0 +1,1 @@
+{%- assign m = include.min | plus: 0 -%}{%- if m >= 60 -%}{%- assign u = m | divided_by: 60 -%}{%- assign r = m | modulo: 60 -%}{{ u }} u{% if r > 0 %} {{ r }} min{% endif %}{%- else -%}{{ m }} min{%- endif -%}
