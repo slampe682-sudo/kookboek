@@ -1,6 +1,9 @@
 ---
 title: Franse uiensoep
 emoji: 🧅
+foto: /assets/fotos/franse-uiensoep.jpg
+foto_credit: sheri silver / Unsplash
+foto_bron: https://unsplash.com/photos/FjxEnioTNs0
 categorie: Voorgerecht
 tijd: 90
 porties: 4

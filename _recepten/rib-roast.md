@@ -1,6 +1,9 @@
 ---
 title: Rib roast met gebakken aardappelen
 emoji: 🥩
+foto: /assets/fotos/rib-roast.jpg
+foto_credit: Hailey Tong / Unsplash
+foto_bron: https://unsplash.com/photos/P-wi4oP_0p4
 categorie: Hoofdgerecht
 tijd: 180
 porties: 6

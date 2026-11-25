@@ -1,6 +1,9 @@
 ---
 title: Ontbijtwrap met ei en bacon
 emoji: 🥓
+foto: /assets/fotos/ontbijtwrap-ei-bacon.jpg
+foto_credit: Leanna Myers / Unsplash
+foto_bron: https://unsplash.com/photos/mypgWO69XDY
 categorie: Ontbijt
 tijd: 20
 porties: 2

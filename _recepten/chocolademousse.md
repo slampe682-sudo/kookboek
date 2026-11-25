@@ -1,6 +1,9 @@
 ---
 title: Chocolademousse
 emoji: 🍫
+foto: /assets/fotos/chocolademousse.jpg
+foto_credit: ABHISHEK HAJARE / Unsplash
+foto_bron: https://unsplash.com/photos/G0xaK8Lfdlg
 categorie: Dessert
 tijd: 20
 porties: 6

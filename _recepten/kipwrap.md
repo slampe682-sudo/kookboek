@@ -1,6 +1,9 @@
 ---
 title: Kipwrap met knoflooksaus
 emoji: 🌯
+foto: /assets/fotos/kipwrap.jpg
+foto_credit: Max Griss / Unsplash
+foto_bron: https://unsplash.com/photos/Spp1G283dow
 categorie: Lunch
 tijd: 30
 porties: 4

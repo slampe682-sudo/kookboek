@@ -1,6 +1,9 @@
 ---
 title: Pasta carbonara
 emoji: 🍝
+foto: /assets/fotos/pasta-carbonara.jpg
+foto_credit: Moira Nazzari / Unsplash
+foto_bron: https://unsplash.com/photos/y8IK2-Ios5A
 categorie: Hoofdgerecht
 tijd: 25
 porties: 4

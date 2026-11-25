@@ -1,6 +1,9 @@
 ---
 title: Crème brûlée
 emoji: 🍮
+foto: /assets/fotos/creme-brulee.jpg
+foto_credit: Max Griss / Unsplash
+foto_bron: https://unsplash.com/photos/DCFt4KA0EuM
 categorie: Dessert
 tijd: 60
 porties: 4

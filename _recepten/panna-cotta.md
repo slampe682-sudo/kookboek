@@ -1,6 +1,9 @@
 ---
 title: Panna cotta met rood fruit
 emoji: 🍓
+foto: /assets/fotos/panna-cotta.jpg
+foto_credit: Alexey Khaneft / Unsplash
+foto_bron: https://unsplash.com/photos/dDHZKYISxso
 categorie: Dessert
 tijd: 25
 porties: 6

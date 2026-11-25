@@ -1,6 +1,9 @@
 ---
 title: Tonijnwrap
 emoji: 🐟
+foto: /assets/fotos/tonijnwrap.jpg
+foto_credit: Leanna Myers / Unsplash
+foto_bron: https://unsplash.com/photos/0Pr5YeRW3Z4
 categorie: Lunch
 tijd: 15
 porties: 2

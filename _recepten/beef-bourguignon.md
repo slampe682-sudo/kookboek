@@ -1,6 +1,9 @@
 ---
 title: Beef bourguignon
 emoji: 🍷
+foto: /assets/fotos/beef-bourguignon.jpg
+foto_credit: Nathan Dumlao / Unsplash
+foto_bron: https://unsplash.com/photos/JXYdIWqA5IM
 categorie: Hoofdgerecht
 tijd: 210
 porties: 6

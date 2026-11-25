@@ -1,6 +1,9 @@
 ---
 title: Traditionele lasagne
 emoji: 🧀
+foto: /assets/fotos/lasagne.jpg
+foto_credit: Emanuel Ekström / Unsplash
+foto_bron: https://unsplash.com/photos/flEUTTwGlJQ
 categorie: Hoofdgerecht
 tijd: 180
 porties: 6
