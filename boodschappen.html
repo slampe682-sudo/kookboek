@@ -44,6 +44,21 @@ permalink: /boodschappen/
     var verberg = false;
     function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
+    // Kopiëren met reserve-methode voor browsers die navigator.clipboard blokkeren
+    async function kopieer(tekst) {
+      try { await navigator.clipboard.writeText(tekst); return true; } catch (e) {}
+      var ta = document.createElement('textarea');
+      ta.value = tekst;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed'; ta.style.top = '0'; ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus(); ta.select(); ta.setSelectionRange(0, tekst.length);
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      return ok;
+    }
+
     function tekstRegel(i) {
       return (i.hv != null ? Lijst.fmt(i.hv) + ' ' + (i.eenheid ? i.eenheid + ' ' : '') : '') + i.naam;
     }
@@ -90,8 +105,9 @@ permalink: /boodschappen/
       try {
         if (navigator.share) { await navigator.share({ title: 'Boodschappenlijst', text: tekst }); return; }
       } catch (e) { if (e && e.name === 'AbortError') return; }
-      try { await navigator.clipboard.writeText(tekst); melding.textContent = 'Gekopieerd! Plak de lijst in WhatsApp, Notities of een e-mail.'; }
-      catch (e) { melding.textContent = 'Kopiëren lukte niet in deze browser.'; }
+      melding.textContent = (await kopieer(tekst))
+        ? 'Gekopieerd! Plak de lijst in WhatsApp, Notities of een e-mail.'
+        : 'Kopiëren lukte niet in deze browser.';
     };
 
     // Herinneringen (iPhone/iPad/Mac): elke geplakte regel wordt een aparte herinnering.
@@ -101,13 +117,12 @@ permalink: /boodschappen/
       var regels = Lijst.samengevoegd().filter(function (i) { return !i.af; }).map(tekstRegel);
       var melding = document.getElementById('melding');
       if (!regels.length) { melding.textContent = 'Alles is al afgevinkt.'; return; }
-      try {
-        await navigator.clipboard.writeText(regels.join('\n'));
+      if (await kopieer(regels.join('\n'))) {
         melding.textContent = '';
         var uitleg = document.getElementById('herinneringenUitleg');
         uitleg.hidden = false;
         uitleg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } catch (e) {
+      } else {
         melding.textContent = 'Kopiëren lukte niet in deze browser. Probeer het in Safari.';
       }
     };
