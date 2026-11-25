@@ -19,7 +19,7 @@ permalink: /boodschappen/
     <ul class="boodschappen" id="items"></ul>
 
     <div class="acties">
-      <button type="button" class="btn primary" id="herinneringen" hidden>📱 Kopieer voor Herinneringen</button>
+      <button type="button" class="btn primary" id="herinneringen" hidden>📱 Naar Herinneringen</button>
       <button type="button" class="btn primary" id="delen">Delen / kopiëren</button>
       <button type="button" class="btn" id="resetVinkjes">↺ Vinkjes resetten</button>
       <button type="button" class="btn" id="afWeg">Afgevinkte verbergen</button>
@@ -27,15 +27,18 @@ permalink: /boodschappen/
     </div>
     <p class="klein" id="melding" role="status"></p>
 
-    <div class="uitleg" id="herinneringenUitleg" hidden>
-      <p><b>✓ Lijst gekopieerd.</b> Zo zet je hem in Herinneringen:</p>
+    <details class="uitleg" id="herinneringenUitleg" hidden>
+      <summary>Eerste keer? Installeer de opdracht (1 tik)</summary>
+      <p>De knop <b>Naar Herinneringen</b> gebruikt een kant-en-klare opdracht in de app <b>Opdrachten</b>. Je hoeft die niet zelf te maken:</p>
       <ol>
-        <li>Open in <b>Herinneringen</b> je lijst (bijv. Boodschappen).</li>
-        <li>Tik op <b>Nieuwe herinnering</b>, houd je vinger op het tekstveld en kies <b>Plak</b>.</li>
+        <li>Tik hieronder op <b>Installeer opdracht</b>.</li>
+        <li>Je iPhone opent Opdrachten. Tik op <b>Voeg opdracht toe</b>. Laat de naam <code>Kookboek-boodschappen</code> zo staan.</li>
+        <li>Klaar. Voortaan zet <b>Naar Herinneringen</b> je hele lijst met één tik in Herinneringen. De eerste keer vraagt je iPhone om toestemming: kies <b>Sta altijd toe</b>.</li>
       </ol>
-      <p>Elke regel wordt automatisch een aparte herinnering.</p>
-      <a class="btn" href="x-apple-reminderkit://">Open Herinneringen</a>
-    </div>
+      <p>De producten komen in je <b>standaardlijst</b> van Herinneringen.</p>
+      <a class="btn primary" href="{{ '/assets/Kookboek-boodschappen.shortcut' | relative_url }}">Installeer opdracht</a>
+      <p class="klein">Liever zonder opdracht? Tik op <b>Delen / kopiëren</b>, open Herinneringen, tik op <b>Nieuwe herinnering</b> en kies <b>Plak</b>. Elke regel wordt een aparte herinnering.</p>
+    </details>
   </div>
 </section>
 
@@ -112,19 +115,17 @@ permalink: /boodschappen/
 
     // Herinneringen (iPhone/iPad/Mac): elke geplakte regel wordt een aparte herinnering.
     var apple = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);
-    if (apple) document.getElementById('herinneringen').hidden = false;
-    document.getElementById('herinneringen').onclick = async function () {
+    if (apple) {
+      document.getElementById('herinneringen').hidden = false;
+      document.getElementById('herinneringenUitleg').hidden = false;
+    }
+    document.getElementById('herinneringen').onclick = function () {
       var regels = Lijst.samengevoegd().filter(function (i) { return !i.af; }).map(tekstRegel);
       var melding = document.getElementById('melding');
       if (!regels.length) { melding.textContent = 'Alles is al afgevinkt.'; return; }
-      if (await kopieer(regels.join('\n'))) {
-        melding.textContent = '';
-        var uitleg = document.getElementById('herinneringenUitleg');
-        uitleg.hidden = false;
-        uitleg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } else {
-        melding.textContent = 'Kopiëren lukte niet in deze browser. Probeer het in Safari.';
-      }
+      location.href = 'shortcuts://run-shortcut?name=' + encodeURIComponent('Kookboek-boodschappen') +
+        '&input=text&text=' + encodeURIComponent(regels.join('\n'));
+      melding.textContent = 'Opdrachten wordt geopend… Gebeurt er niets? Installeer eerst de opdracht (hieronder).';
     };
 
     render();
