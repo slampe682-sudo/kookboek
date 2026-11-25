@@ -2,6 +2,7 @@
 title: Tiramisu
 emoji: ☕
 foto: /assets/fotos/tiramisu.jpg
+foto_positie: center 85%
 foto_credit: Marianna OLE / Unsplash
 foto_bron: https://unsplash.com/photos/white-and-brown-ceramic-cake-4El3DUkQs2g
 categorie: Dessert

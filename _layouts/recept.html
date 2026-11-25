@@ -6,7 +6,7 @@ layout: default
 
   {% if page.foto %}
   <figure class="recept-foto">
-    <img src="{{ page.foto | relative_url }}" alt="{{ page.title }}">
+    <img src="{{ page.foto | relative_url }}" alt="{{ page.title }}" style="object-position: {{ page.foto_positie | default: 'center' }}">
     {% if page.foto_credit %}<figcaption>Foto: {% if page.foto_bron %}<a href="{{ page.foto_bron }}" target="_blank" rel="noopener">{{ page.foto_credit }}</a>{% else %}{{ page.foto_credit }}{% endif %}</figcaption>{% endif %}
   </figure>
   {% endif %}

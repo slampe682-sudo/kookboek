@@ -73,9 +73,9 @@ h1, h2 { font-family: Fraunces, Georgia, serif; letter-spacing: -.01em; line-hei
 .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
 .card-emoji { font-size: 3.4rem; text-align: center; padding: 22px 0; background: var(--accent-soft); }
 .card-body { padding: 16px 18px 18px; }
-.card-foto { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--accent-soft); }
+.card-foto { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; background: var(--accent-soft); }
 .recept-foto { margin: 0 0 24px; position: relative; border-radius: var(--radius); overflow: hidden; background: var(--accent-soft); }
-.recept-foto img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center 60%; }
+.recept-foto img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 .recept-foto figcaption {
   position: absolute; right: 10px; bottom: 10px; padding: 3px 10px; border-radius: 999px;
   background: rgba(0,0,0,.55); color: #fff; font-size: .75rem;
