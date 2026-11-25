@@ -151,6 +151,13 @@ h1, h2 { font-family: Fraunces, Georgia, serif; letter-spacing: -.01em; line-hei
 .boodschappen input { accent-color: var(--accent); width: 20px; height: 20px; margin-top: 2px; flex: none; }
 .boodschappen input:checked + span { text-decoration: line-through; color: var(--muted); }
 .boodschappen small { color: var(--muted); }
+.uitleg { margin-top: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 20px; }
+.uitleg summary { cursor: pointer; font-weight: 600; }
+.uitleg p, .uitleg li { color: var(--muted); }
+.uitleg ol { padding-left: 20px; }
+.uitleg li { margin-bottom: 6px; }
+.uitleg b, .uitleg code { color: var(--text); }
+.uitleg code { background: var(--accent-soft); padding: 1px 6px; border-radius: 6px; }
 
 @media print {
   .lijst-link, .lijst-knop, #lijstMelding, .recept-chip button { display: none !important; }
