@@ -1,6 +1,9 @@
 ---
 title: Snelle kalfsfond (15 minuten)
 emoji: 🍲
+foto: /assets/fotos/kalfsfond.jpg
+foto_credit: Ryutaro Uozumi / Unsplash
+foto_bron: https://unsplash.com/photos/bzsXHiw6O6g
 categorie: Basis
 tijd: 55
 porties: 1

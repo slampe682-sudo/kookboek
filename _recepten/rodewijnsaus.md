@@ -1,6 +1,9 @@
 ---
 title: Rodewijnsaus
 emoji: 🍷
+foto: /assets/fotos/rodewijnsaus.jpg
+foto_credit: Orkun Orcan / Unsplash
+foto_bron: https://unsplash.com/photos/wkms_RlOuDU
 categorie: Saus
 tijd: 30
 porties: 2

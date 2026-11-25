@@ -1,6 +1,9 @@
 ---
 title: Zelfgemaakt bouillonpoeder
 emoji: 🫙
+foto: /assets/fotos/bouillonpoeder.jpg
+foto_credit: Diana Polekhina / Unsplash
+foto_bron: https://unsplash.com/photos/bA1r4unkXAQ
 categorie: Basis
 tijd: 70
 porties: 1
