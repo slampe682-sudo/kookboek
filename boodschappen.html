@@ -19,7 +19,7 @@ permalink: /boodschappen/
     <ul class="boodschappen" id="items"></ul>
 
     <div class="acties">
-      <button type="button" class="btn primary" id="herinneringen" hidden>📱 Naar Herinneringen</button>
+      <button type="button" class="btn primary" id="herinneringen" hidden>📱 Kopieer voor Herinneringen</button>
       <button type="button" class="btn primary" id="delen">Delen / kopiëren</button>
       <button type="button" class="btn" id="resetVinkjes">↺ Vinkjes resetten</button>
       <button type="button" class="btn" id="afWeg">Afgevinkte verbergen</button>
@@ -27,20 +27,15 @@ permalink: /boodschappen/
     </div>
     <p class="klein" id="melding" role="status"></p>
 
-    <details class="uitleg" id="herinneringenUitleg" hidden>
-      <summary>Eenmalig instellen: lijst naar Herinneringen op je iPhone</summary>
-      <p>De knop <b>Naar Herinneringen</b> start een opdracht in de app <b>Opdrachten</b> (Shortcuts). Die zet elk product als los item in je Herinneringen-lijst. Maak die opdracht één keer zo aan:</p>
+    <div class="uitleg" id="herinneringenUitleg" hidden>
+      <p><b>✓ Lijst gekopieerd.</b> Zo zet je hem in Herinneringen:</p>
       <ol>
-        <li>Open de app <b>Herinneringen</b> en maak een lijst <b>Boodschappen</b> (als je die nog niet hebt).</li>
-        <li>Open de app <b>Opdrachten</b> en tik rechtsboven op <b>+</b>.</li>
-        <li>Tik bovenaan op de naam en noem de opdracht precies: <code>Kookboek boodschappen</code></li>
-        <li>Voeg de actie <b>Splits tekst</b> toe. Tik op het blauwe woord ervoor en kies <b>Invoer van opdracht</b>. Zet "Scheidingsteken" op <b>Nieuwe regels</b>.</li>
-        <li>Voeg de actie <b>Herhaal met elk</b> toe (die pakt automatisch de gesplitste tekst).</li>
-        <li>Sleep binnen de herhaling de actie <b>Voeg nieuwe herinnering toe</b>. Kies als tekst <b>Herhaalonderdeel</b> en als lijst <b>Boodschappen</b>.</li>
-        <li>Tik op het <b>ⓘ</b>-icoon onderaan, zet <b>Ontvang</b> aan voor <b>Tekst</b>. Tik op <b>Gereed</b>.</li>
+        <li>Open in <b>Herinneringen</b> je lijst (bijv. Boodschappen).</li>
+        <li>Tik op <b>Nieuwe herinnering</b>, houd je vinger op het tekstveld en kies <b>Plak</b>.</li>
       </ol>
-      <p>Klaar! Vanaf nu staat je hele lijst met één tik in Herinneringen. De eerste keer vraagt je iPhone om toestemming; tik op <b>Sta altijd toe</b>.</p>
-    </details>
+      <p>Elke regel wordt automatisch een aparte herinnering.</p>
+      <a class="btn" href="x-apple-reminderkit://">Open Herinneringen</a>
+    </div>
   </div>
 </section>
 
@@ -99,19 +94,22 @@ permalink: /boodschappen/
       catch (e) { melding.textContent = 'Kopiëren lukte niet in deze browser.'; }
     };
 
-    // Apple-apparaten (iPhone, iPad, Mac) hebben de app Opdrachten
+    // Herinneringen (iPhone/iPad/Mac): elke geplakte regel wordt een aparte herinnering.
     var apple = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);
-    if (apple) {
-      document.getElementById('herinneringen').hidden = false;
-      document.getElementById('herinneringenUitleg').hidden = false;
-    }
-    document.getElementById('herinneringen').onclick = function () {
+    if (apple) document.getElementById('herinneringen').hidden = false;
+    document.getElementById('herinneringen').onclick = async function () {
       var regels = Lijst.samengevoegd().filter(function (i) { return !i.af; }).map(tekstRegel);
-      if (!regels.length) { document.getElementById('melding').textContent = 'Alles is al afgevinkt.'; return; }
-      location.href = 'shortcuts://run-shortcut?name=' + encodeURIComponent('Kookboek boodschappen') +
-        '&input=text&text=' + encodeURIComponent(regels.join('\n'));
-      document.getElementById('melding').textContent =
-        'Opdrachten wordt geopend… Gebeurt er niets? Stel de opdracht eerst in (zie hieronder).';
+      var melding = document.getElementById('melding');
+      if (!regels.length) { melding.textContent = 'Alles is al afgevinkt.'; return; }
+      try {
+        await navigator.clipboard.writeText(regels.join('\n'));
+        melding.textContent = '';
+        var uitleg = document.getElementById('herinneringenUitleg');
+        uitleg.hidden = false;
+        uitleg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (e) {
+        melding.textContent = 'Kopiëren lukte niet in deze browser. Probeer het in Safari.';
+      }
     };
 
     render();
