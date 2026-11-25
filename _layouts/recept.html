@@ -4,8 +4,14 @@ layout: default
 <article class="recept">
   <a class="terug" href="{{ '/' | relative_url }}">← Alle recepten</a>
 
-  <header class="recept-kop">
-    <div class="recept-emoji" aria-hidden="true">{{ page.emoji | default: "🍽️" }}</div>
+  {% if page.foto %}
+  <figure class="recept-foto">
+    <img src="{{ page.foto | relative_url }}" alt="{{ page.title }}">
+    {% if page.foto_credit %}<figcaption>Foto: {% if page.foto_bron %}<a href="{{ page.foto_bron }}" target="_blank" rel="noopener">{{ page.foto_credit }}</a>{% else %}{{ page.foto_credit }}{% endif %}</figcaption>{% endif %}
+  </figure>
+  {% endif %}
+  <header class="recept-kop{% if page.foto %} met-foto{% endif %}">
+    {% unless page.foto %}<div class="recept-emoji" aria-hidden="true">{{ page.emoji | default: "🍽️" }}</div>{% endunless %}
     <div>
       <span class="tag">{{ page.categorie }}</span>
       <h1>{{ page.title }}</h1>

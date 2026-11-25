@@ -37,7 +37,7 @@ ingredienten:
 <section class="cards" id="lijst">
   {% for r in recepten %}
   <a class="card" href="{{ r.url | relative_url }}" data-cat="{{ r.categorie }}" data-zoek="{{ r.title | downcase }} {% for i in r.ingredienten %}{{ i.naam | downcase }} {% endfor %}">
-    <div class="card-emoji" aria-hidden="true">{{ r.emoji | default: "🍽️" }}</div>
+    {% if r.foto %}<img class="card-foto" src="{{ r.foto | relative_url }}" alt="{{ r.title }}" loading="lazy">{% else %}<div class="card-emoji" aria-hidden="true">{{ r.emoji | default: "🍽️" }}</div>{% endif %}
     <div class="card-body">
       <span class="tag">{{ r.categorie }}</span>
       <h2>{{ r.title }}</h2>

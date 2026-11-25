@@ -13,6 +13,15 @@
   <link rel="icon" href="{{ '/assets/favicon-32.png' | relative_url }}?v={{ versie }}" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | relative_url }}?v={{ versie }}">
   <meta name="theme-color" content="#c2502a">
+  <!-- Linkvoorbeeld in WhatsApp, iMessage, Facebook enz. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:title" content="{{ page.title | default: site.title }}">
+  <meta property="og:description" content="{{ page.beschrijving | default: site.description }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:image" content="{{ page.foto | default: '/assets/apple-touch-icon.png' | absolute_url }}">
+  <meta property="og:locale" content="nl_NL">
+  <meta name="twitter:card" content="{% if page.foto %}summary_large_image{% else %}summary{% endif %}">
   <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}?v={{ versie }}">
   <script>
     // Beheerknoppen alleen tonen na één keer openen via ?beheer (uitzetten met ?uit)
