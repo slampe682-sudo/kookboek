@@ -55,6 +55,12 @@ window.Lijst = (function () {
     schrijf(d);
   }
 
+  function resetVinkjes() {
+    var d = lees();
+    d.afgevinkt = {};
+    schrijf(d);
+  }
+
   function fmt(x) {
     if (x >= 10) return String(Math.round(x));
     var r = Math.round(x * 2) / 2, heel = Math.floor(r);
@@ -70,5 +76,5 @@ window.Lijst = (function () {
   }
   document.addEventListener('DOMContentLoaded', teller);
 
-  return { lees: lees, voegToe: voegToe, verwijder: verwijder, leeg: leeg, samengevoegd: samengevoegd, vink: vink, fmt: fmt };
+  return { lees: lees, voegToe: voegToe, verwijder: verwijder, leeg: leeg, samengevoegd: samengevoegd, vink: vink, resetVinkjes: resetVinkjes, fmt: fmt };
 })();

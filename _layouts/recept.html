@@ -34,6 +34,7 @@ layout: default
         </li>
         {% endfor %}
       </ul>
+      <button type="button" class="link-knop" id="resetIngr">↺ Vinkjes resetten</button>
       <button type="button" class="btn primary lijst-knop" id="naarLijst">🛒 Op boodschappenlijst</button>
       <p class="klein" id="lijstMelding" role="status"></p>
     </section>
@@ -82,5 +83,8 @@ layout: default
   };
   document.getElementById('min').onclick = () => { if (n > 1) { n--; update(); } };
   document.getElementById('plus').onclick = () => { if (n < 40) { n++; update(); } };
+  document.getElementById('resetIngr').onclick = () => {
+    document.querySelectorAll('.ingredienten input[type=checkbox]').forEach(c => { c.checked = false; });
+  };
   update(); // meteen ½ i.p.v. 0.5 tonen
 </script>

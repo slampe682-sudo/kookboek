@@ -21,6 +21,7 @@ permalink: /boodschappen/
     <div class="acties">
       <button type="button" class="btn primary" id="herinneringen" hidden>📱 Naar Herinneringen</button>
       <button type="button" class="btn primary" id="delen">Delen / kopiëren</button>
+      <button type="button" class="btn" id="resetVinkjes">↺ Vinkjes resetten</button>
       <button type="button" class="btn" id="afWeg">Afgevinkte verbergen</button>
       <button type="button" class="btn" id="wissen">Lijst leegmaken</button>
     </div>
@@ -80,6 +81,10 @@ permalink: /boodschappen/
       if (e.target.dataset.weg) { Lijst.verwijder(e.target.dataset.weg); render(); }
     });
     document.getElementById('afWeg').onclick = function () { verberg = !verberg; render(); };
+    document.getElementById('resetVinkjes').onclick = function () {
+      Lijst.resetVinkjes(); verberg = false; render();
+      document.getElementById('melding').textContent = 'Alle vinkjes zijn gewist.';
+    };
     document.getElementById('wissen').onclick = function () {
       if (confirm('Weet je zeker dat je de hele lijst wilt leegmaken?')) { Lijst.leeg(); render(); }
     };
