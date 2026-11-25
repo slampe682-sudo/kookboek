@@ -73,7 +73,7 @@ permalink: /boodschappen/
       if (!d.recepten.length) return;
 
       document.getElementById('receptChips').innerHTML = d.recepten.map(function (r) {
-        return '<span class="recept-chip"><a href="' + esc(r.url) + '">' + esc(r.titel) + '</a> · ' + r.porties + ' pers. ' +
+        return '<span class="recept-chip"><a href="' + esc(r.url) + '">' + esc(r.titel) + '</a> · ' + r.porties + ' ' + esc(r.eenheid || 'pers.') + ' ' +
           '<button type="button" data-weg="' + esc(r.url) + '" aria-label="' + esc(r.titel) + ' van de lijst halen">×</button></span>';
       }).join('');
 

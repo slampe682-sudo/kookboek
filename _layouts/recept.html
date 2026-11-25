@@ -26,7 +26,7 @@ layout: default
         <h2>Ingrediënten</h2>
         <div class="stepper" aria-label="Aantal personen">
           <button type="button" id="min" aria-label="Minder personen">−</button>
-          <span><b id="aantal">{{ page.porties }}</b> pers.</span>
+          <span><b id="aantal">{{ page.porties }}</b> {{ page.porties_eenheid | default: "pers." }}</span>
           <button type="button" id="plus" aria-label="Meer personen">+</button>
         </div>
       </div>
@@ -78,6 +78,7 @@ layout: default
       titel: {{ page.title | jsonify }},
       url: {{ page.url | relative_url | jsonify }},
       porties: n,
+      eenheid: {{ page.porties_eenheid | default: "pers." | jsonify }},
       items: ingredienten.map(i => ({
         naam: i.naam,
         eenheid: i.eenheid || '',
@@ -85,7 +86,7 @@ layout: default
       }))
     });
     document.getElementById('lijstMelding').innerHTML =
-      '✓ Toegevoegd voor ' + n + ' pers. <a href="{{ '/boodschappen/' | relative_url }}">Bekijk je lijst →</a>';
+      '✓ Toegevoegd voor ' + n + ' {{ page.porties_eenheid | default: "pers." }} <a href="{{ '/boodschappen/' | relative_url }}">Bekijk je lijst →</a>';
   };
   document.getElementById('min').onclick = () => { if (n > 1) { n--; update(); } };
   document.getElementById('plus').onclick = () => { if (n < 40) { n++; update(); } };
